@@ -10,6 +10,7 @@
     "prettier": "^2.7.1"
   },
   "dependencies": {
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "build": "^0.1.4"
   }
 }
