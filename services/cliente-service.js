@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const tabela = document.querySelector('[data-tabela]');
 
 const criaNovaLinha = (nome, email) => {
@@ -17,25 +18,14 @@ const criaNovaLinha = (nome, email) => {
 	return linhaNovoCliente;
 };
 
-const listaClientes = () => {
-	const promise = new Promise((resolve, reject) => {
-		const http = new XMLHttpRequest();
-		http.open('GET', 'http://localhost:3000/profile');
+async function listaClientes() {
+	const url = await fetch('http://localhost:3000/profile');
+	const urlPara = await url.json();
+	return urlPara;
+}
 
-		http.onload = () => {
-			if (http.status >= 400) {
-				reject(JSON.parse(http.response));
-			} else {
-				resolve(JSON.parse(http.response));
-			}
-		};
-		http.send();
-	});
-	return promise;
-};
-
-listaClientes().then((data) => {
-	data.forEach((elemento) => {
-		tabela.appendChild(criaNovaLinha(elemento.nome, elemento.email));
+listaClientes().then((resposta) => {
+	resposta.forEach((el) => {
+		tabela.appendChild(criaNovaLinha(el.nome, el.email));
 	});
 });

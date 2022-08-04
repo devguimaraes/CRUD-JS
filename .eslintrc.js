@@ -9,9 +9,13 @@ module.exports = {
 		Atomics: 'readonly',
 		SharedArrayBuffer: 'readonly',
 	},
+
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		ecmaFeatures: {
+			experimentalObjectRestSpread: true,
+		},
 	},
 	rules: {
 		'no-restricted-globals': ['error', 'event', 'fdescribe'],
@@ -22,4 +26,5 @@ module.exports = {
 		camelcase: 'off',
 		'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
 	},
+	ignorePatterns: ['**/*.html'],
 };
